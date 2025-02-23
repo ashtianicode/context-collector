@@ -1,12 +1,19 @@
-# Codebase Documentation Script
+# Context Collector for LLMs
 
-A simple, portable Perl script to gather and document files in a directory. Easily filter by file patterns and produce a comprehensive single Markdown file.
+A lightweight (60-line) Perl script that helps collect and organize codebase context for LLMs. Perfect for gathering relevant code snippets and files before sending them to your favorite LLM.
+
+## Features
+- Quick context gathering from any directory
+- Flexible file filtering with include/exclude patterns
+- Outputs a single, clean Markdown file ready for LLM consumption
+- Maintains file structure and organization in the output
+- Extremely portable - just needs Perl and one module
 
 ## Installation
 
-1. **Clone** or **download** this repository to your local machine.
-2. Ensure you have a modern Perl installation (5.10+).
-3. If needed, install the [File::Slurp](https://metacpan.org/pod/File::Slurp) module:
+1. **Clone** or **download** this repository
+2. Ensure you have Perl 5.10+ installed
+3. Install the required [File::Slurp](https://metacpan.org/pod/File::Slurp) module:
    ```bash
    cpanm File::Slurp
    ```
@@ -16,43 +23,42 @@ A simple, portable Perl script to gather and document files in a directory. Easi
    ```
 4. Make the script executable:
    ```bash
-   chmod +x codebase.pl
+   chmod +x context-collector.pl
    ```
 
 ## Usage
 
 ```bash
-./codebase.pl [options]
+./context-collector.pl [options]
 ```
 
 ### Options
-- `--help, -h`: Show usage information.
-- `--dir, -d <directory>`: Directory to scan. Defaults to . (current directory).
-- `--output, -o <file>`: Output file. Defaults to codebase.md.
-- `--include, -i <patterns>`: Comma-separated patterns to include (case-insensitive).
-- `--exclude, -e <patterns>`: Comma-separated patterns to exclude (case-insensitive).
+- `--help, -h`: Show usage information
+- `--dir, -d <directory>`: Directory to scan (defaults to current directory)
+- `--output, -o <file>`: Output file (defaults to codebase.md)
+- `--include, -i <patterns>`: Comma-separated patterns to include (case-insensitive)
+- `--exclude, -e <patterns>`: Comma-separated patterns to exclude (case-insensitive)
 
 ### Examples
-1. Default usage:
+1. Collect context from current directory:
    ```bash
-   ./codebase.pl
-   ```
-   Scans the current directory, producing codebase.md.
-
-2. Custom directory and output:
-   ```bash
-   ./codebase.pl --dir myproject --output docs.md
+   ./context-collector.pl
    ```
 
-3. Include only .go and .txt files, exclude pkg and .git:
+2. Gather context from a specific project:
    ```bash
-   ./codebase.pl --include go,txt --exclude pkg,.git
+   ./context-collector.pl --dir my-project --output context.md
+   ```
+
+3. Focus on specific file types while excluding irrelevant directories:
+   ```bash
+   ./context-collector.pl --include py,js,jsx --exclude node_modules,venv
    ```
 
 ## Contributing
-1. Fork this repository.
-2. Create a new branch for your contribution.
-3. Commit and push your changes.
-4. Open a Pull Request describing the changes.
+1. Fork this repository
+2. Create a new branch for your contribution
+3. Commit and push your changes
+4. Open a Pull Request
 
-We welcome feature requests, bug reports, and code improvements!
+We welcome feature requests, bug reports, and improvements!
